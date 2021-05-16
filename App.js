@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import global_BackgroundColor_100 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_100';
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
+import black from '@patternfly/react-tokens/dist/js/global_palette_black_1000'
+import global_BackgroundColor_200 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_200';
 import Header from './src/views/Header'
 
 export default function App() {
@@ -19,11 +20,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
     flex: 1,
-    backgroundColor: global_BackgroundColor_100.value
+    backgroundColor: global_BackgroundColor_200.value
   },
   text: {
-    color: global_Color_100.value
+    color: black.value
   }
 });

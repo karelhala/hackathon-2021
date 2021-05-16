@@ -1,15 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Icon from '../components/Icon';
+import global_BackgroundColor_100 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_100';
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import { UserCircleIconConfig, BarsIconConfig } from '@patternfly/react-icons';
 
 const Header = () => (
-  <View style={{ flex: 1, flexDirection: 'row' }}>
+  <View style={{...styles.rowFlex, ...styles.container}}>
     <View style={{ flex: 2}}>
       <Icon {...BarsIconConfig} />
     </View>
-    <View style={{ flex: 1, flexDirection: 'row'}}>
+    <View style={styles.rowFlex}>
       <Icon {...UserCircleIconConfig} />
       <Text style={styles.text}>Login</Text>
     </View>
@@ -17,6 +18,15 @@ const Header = () => (
 );
 
 const styles = StyleSheet.create({
+  rowFlex: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  container: {
+    backgroundColor: global_BackgroundColor_100.value,
+    paddingLeft: 15,
+    paddingTop: 15
+  },
   text: {
     color: global_Color_100.value
   }
