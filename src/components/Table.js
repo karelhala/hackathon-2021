@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import white from '@patternfly/react-tokens/dist/js/global_palette_white';
 
 const Table = ({ header, rows, style }) => {
-  return <View style={{
+  return <ScrollView style={{
     ...styles.table,
     ...style
   }}>
@@ -17,7 +17,7 @@ const Table = ({ header, rows, style }) => {
         <View style={{...styles.break}}/>
       </View>)}
     </View>)}
-  </View>
+  </ScrollView>
 }
 
 const styles = StyleSheet.create({
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'wrap',
-    alignContent: 'stretch'
-    
+    alignContent: 'stretch',
+    marginBottom: 40
   },
   row: {
     backgroundColor: white.value,

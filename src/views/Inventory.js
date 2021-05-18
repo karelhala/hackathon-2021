@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { LoginContext } from '../utils/loginContext';
 import { authFetch } from '../utils/api';
 import Header from './Header';
+import Table from '../components/Table';
 
 const Inventory = ({ navigation }) => {
   const config = useContext(LoginContext);
@@ -10,7 +11,7 @@ const Inventory = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       const data = await authFetch(
-        '/api/inventory/v1/hosts?per_page=50&page=1&staleness=fresh&staleness=stale&staleness=unknown',
+        '/api/inventory/v1/hosts?per_page=50&page=1&order_by=updated&order_how=DESC&staleness=fresh&staleness=stale&&registered_with=insights&fields%5Bsystem_profile%5D%5B%5D=operating_system',
         config
       );
       setData(data);
@@ -18,7 +19,12 @@ const Inventory = ({ navigation }) => {
   }, []);
   return <View>
       <Header navigation={navigation}/>
-      <Text>Inventory</Text>
+      <View>
+        {data ? <Table header={['Name', 'Last seen']} rows={data.results.map(({ display_name, created }) => ([
+          display_name,
+          created
+        ]))}/>: <Text>Loading!</Text>}
+      </View>
     </View>;
 }
 
