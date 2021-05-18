@@ -20,10 +20,10 @@ const Inventory = ({ navigation }) => {
   return <View>
       <Header navigation={navigation}/>
       <View>
-        {data ? <Table header={['Name', 'Last seen']} rows={data.results.map(({ display_name, created }) => ([
-          display_name,
-          created
-        ]))}/>: <Text>Loading!</Text>}
+        {data ? <Table header={['Name', 'Last seen']} rows={data.results.map(({ id, display_name, created }) => ({
+          id,
+          data: [ display_name, created ]
+        }))}/>: <Text>Loading!</Text>}
       </View>
     </View>;
 }
