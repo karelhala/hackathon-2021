@@ -17,9 +17,9 @@ const Inventory = ({ navigation }) => {
       setData(data);
     })()
   }, []);
-  return <View>
+  return <View style={{ flex: 1 }}>
       <Header navigation={navigation}/>
-      <View>
+      <View style={{ flex: 1, paddingBottom: 10 }}>
         {data ? <Table header={['Name', 'Last seen']} rows={data.results.map(({ id, display_name, created }) => ({
           id,
           data: [ display_name, created ]

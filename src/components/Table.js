@@ -5,6 +5,7 @@ import white from '@patternfly/react-tokens/dist/js/global_palette_white';
 const Table = ({ rows, header, style }) => {
   return <FlatList
     style={{
+      ...styles.table,
       ...style
     }}
     data={rows}
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'wrap',
     alignContent: 'stretch',
-    marginBottom: 40
+    // marginBottom: 100
   },
   row: {
     backgroundColor: white.value,
