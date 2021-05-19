@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import black from '@patternfly/react-tokens/dist/js/global_palette_black_1000'
 import global_BackgroundColor_200 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_200';
-import Header from './src/views/Header'
 import Login from './src/components/Login';
 import { LoginContext } from './src/utils/loginContext';
 import { createDrawerNavigator } from '@react-navigation/drawer';

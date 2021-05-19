@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Icon from '../components/Icon';
 import global_BackgroundColor_100 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_100';
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import { UserCircleIconConfig } from '@patternfly/react-icons';
 import { LoginContext } from '../utils/loginContext';
 import { Level, LevelItem } from '../layouts/Level';
+import Button, { variant } from '../components/Button';
 
 const Header = ({ navigation }) => {
   const config = useContext(LoginContext);
@@ -15,10 +16,11 @@ const Header = ({ navigation }) => {
       <LevelItem>
         <Level>
           <LevelItem>
-            <Icon {...UserCircleIconConfig} />
-          </LevelItem>
-          <LevelItem style={{ marginLeft: 10 }}>
             <Button
+              icon={
+                <Icon {...UserCircleIconConfig} style={{ marginRight: 10 }} />
+              }
+              variant={variant.plain}
               onPress={() => navigation.openDrawer()}
               title={config.identity.user.username}
             />
