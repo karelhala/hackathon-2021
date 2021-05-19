@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import white from '@patternfly/react-tokens/dist/js/global_palette_white';
 import { ThemeContext } from '../utils/contexts';
 
-const Table = ({ rows, header, style }) => {
+const Table = ({ rows, header, style, ...props }) => {
   const { text } = useContext(ThemeContext);
   return <FlatList
     style={{
@@ -24,6 +24,7 @@ const Table = ({ rows, header, style }) => {
       </View>
     )}
     keyExtractor={item => item.id}
+    {...props}
   />;
 };
 
