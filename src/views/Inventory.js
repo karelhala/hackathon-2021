@@ -4,6 +4,7 @@ import { LoginContext } from '../utils/loginContext';
 import { authFetch } from '../utils/api';
 import Header from './Header';
 import Table from '../components/Table';
+import FormatDate from '../components/Date';
 
 const Inventory = ({ navigation }) => {
   const config = useContext(LoginContext);
@@ -22,7 +23,7 @@ const Inventory = ({ navigation }) => {
       <View style={{ flex: 1, paddingBottom: 10 }}>
         {data ? <Table header={['Name', 'Last seen']} rows={data.results.map(({ id, display_name, created }) => ({
           id,
-          data: [ display_name, created ]
+          data: [ display_name, <FormatDate date={created}/> ]
         }))}/>: <Text>Loading!</Text>}
       </View>
     </View>;
