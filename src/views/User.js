@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
-import { LoginContext } from '../utils/loginContext';
+import { LoginContext } from '../utils/contexts';
 import Header from './Header';
 
 const User = ({ navigation }) => {

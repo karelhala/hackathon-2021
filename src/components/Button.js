@@ -75,8 +75,8 @@ const Button = ({ variant = 'primary', style, titleStyle, ...props }) => {
       ...style
     }}
     titleStyle={{
+      ...titleStyle,
       ...titleStyles?.[variant],
-      ...titleStyle
     }}
     {...props}
   />;

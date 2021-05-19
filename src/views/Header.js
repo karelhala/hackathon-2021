@@ -4,7 +4,7 @@ import Icon from '../components/Icon';
 import global_BackgroundColor_100 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_100';
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import { UserCircleIconConfig } from '@patternfly/react-icons';
-import { LoginContext } from '../utils/loginContext';
+import { LoginContext } from '../utils/contexts';
 import { Level, LevelItem } from '../layouts/Level';
 import Button, { variant } from '../components/Button';
 

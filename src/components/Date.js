@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../utils/contexts';
 import { Tooltip, Text } from 'react-native-elements';
 
 export const second = 1000;
@@ -21,10 +22,14 @@ export const relativeTimeTable = [
 export const exact = (value) => value.toUTCString().split(',')[1].slice(0, -7).trim();
 
 const FormatDate = ({ date, tooltipProps, formatTooltip, textProps, ...props }) => {
+  const { text } = useContext(ThemeContext);
   const currDate = new Date(date);
   return (
     <Tooltip popover={<Text {...tooltipProps}>{formatTooltip ? formatTooltip(currDate, exact(currDate)) : exact(currDate)} UTC</Text>} {...props}>
-      <Text {...textProps}>{relativeTimeTable.reduce((acc, i) => (i.rightBound > Date.now() - currDate ? i.description(Date.now() - currDate) : acc), exact(currDate))}</Text>
+      <Text style={{
+        ...text,
+        ...textProps?.style
+      }} {...textProps}>{relativeTimeTable.reduce((acc, i) => (i.rightBound > Date.now() - currDate ? i.description(Date.now() - currDate) : acc), exact(currDate))}</Text>
     </Tooltip>
   );
 }

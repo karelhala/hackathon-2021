@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Text, View, Modal } from 'react-native';
-import { LoginContext } from '../utils/loginContext';
+import { LoginContext, ThemeContext } from '../utils/contexts';
 import { authFetch } from '../utils/api';
 import Header from './Header';
 import Table from '../components/Table';
@@ -12,10 +12,10 @@ import { TimesIconConfig } from '@patternfly/react-icons';
 import InventoryDetail from '../components/InventoryDetail'
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import darkColor from '@patternfly/react-tokens/dist/js/global_Color_dark_100';
-import white from '@patternfly/react-tokens/dist/js/global_palette_white';
 import Icon from '../components/Icon';
 
 const Inventory = ({ navigation }) => {
+  const { text, whiteText } = useContext(ThemeContext);
   const config = useContext(LoginContext);
   const [openSystem, setOpenSystem] = useState();
   const [data, setData] = useState(); // here should be paginated data
@@ -42,7 +42,7 @@ const Inventory = ({ navigation }) => {
                 }}>
                   <Split>
                     <SplitItem isFill style={{ flex: 1, padding: 10 }}>
-                      <Text style={{ fontSize: 20, color: white.value }}>{openSystem?.name}</Text>
+                      <Text style={{ ...whiteText, fontSize: 25 }}>{openSystem?.name}</Text>
                     </SplitItem>
                     <SplitItem style={{ paddingTop: 5 }}>
                       <Button icon={<Icon {...TimesIconConfig} />} onPress={() => setOpenSystem(undefined)}/>
@@ -58,12 +58,12 @@ const Inventory = ({ navigation }) => {
           </Modal>
         {data ? <Table header={['Name', 'Last seen']} rows={data.results.map(({ id, display_name, created }) => ({
           id,
-          data: [ <Button onPress={() => setOpenSystem({
+          data: [ <Button titleStyle={text} onPress={() => setOpenSystem({
             id,
             name: display_name,
             lastSeen: created
           })} variant="plain" title={display_name} />, <FormatDate date={created}/> ]
-        }))}/>: <Text>Loading!</Text>}
+        }))}/>: <Text style={text}>Loading!</Text>}
       </View>
     </View>;
 }

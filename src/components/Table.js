@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import white from '@patternfly/react-tokens/dist/js/global_palette_white';
+import { ThemeContext } from '../utils/contexts';
 
 const Table = ({ rows, header, style }) => {
+  const { text } = useContext(ThemeContext);
   return <FlatList
     style={{
       ...styles.table,
@@ -15,8 +17,8 @@ const Table = ({ rows, header, style }) => {
         ...styles.cell,
         ...cellKey === 0 && styles.first
         }}>
-          <View style={{...styles.header}}>{typeof cell === 'string' ? <Text style={{ fontWeight: '700' }}>{cell}</Text> : cell}</View>
-          <View style={{...styles.content}}>{typeof data?.[cellKey] === 'string' ? <Text>{data?.[cellKey]}</Text> : data?.[cellKey] || ''}</View>
+          <View style={{...styles.header}}>{typeof cell === 'string' ? <Text style={{ fontWeight: '700', ...text }}>{cell}</Text> : cell}</View>
+          <View style={{...styles.content}}>{typeof data?.[cellKey] === 'string' ? <Text style={{ text }}>{data?.[cellKey]}</Text> : data?.[cellKey] || ''}</View>
           <View style={{...styles.break}}/>
         </View>)}
       </View>
