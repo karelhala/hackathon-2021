@@ -4,6 +4,7 @@ import { exact } from '../components/Date';
 import { ThemeContext } from '../utils/contexts';
 import Vulnerability from './Vulnerability';
 import Advisor from './Advisor';
+import Patch from './Patch';
 import global_BackgroundColor_200 from '@patternfly/react-tokens/dist/js/global_BackgroundColor_200';
 
 const InventoryDetail = ({ id, lastSeen, style, ...props }) => {
@@ -27,6 +28,7 @@ const InventoryDetail = ({ id, lastSeen, style, ...props }) => {
     <ScrollView style={{ flex: 1 }}>
       <Vulnerability systemId={id} />
       <Advisor systemId={id} />
+      <Patch systemId={id} />
     </ScrollView>
   </View>
 };
