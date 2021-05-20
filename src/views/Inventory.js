@@ -14,6 +14,7 @@ import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_bl
 import darkColor from '@patternfly/react-tokens/dist/js/global_Color_dark_100';
 import Icon from '../components/Icon';
 import Remediate from '../game';
+import Pagination from '../components/Pagination';
 
 const Inventory = ({ navigation }) => {
   const { text, whiteText } = useContext(ThemeContext);
@@ -66,6 +67,7 @@ const Inventory = ({ navigation }) => {
                 </StackItem>
               </Stack>
           </Modal>
+          <Pagination />
           <Table
             header={[
               'Name',
