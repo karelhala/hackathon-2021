@@ -6,6 +6,7 @@ import {
   PieChart,
 } from 'expo-chart-kit'
 import white from '@patternfly/react-tokens/dist/js/global_palette_white';
+import { Fragment } from 'react';
 
 const colorMapper = {
   Enhancement: 'rgba(149, 213, 142, 0.6)',
@@ -42,8 +43,11 @@ const Patch = ({ systemId }) => {
     paddingRight: 10,
     backgroundColor: white.value
   }}>
-    <Text style={text}>Available patch advisories for this system</Text>
-    <PieChart
+    {(data && Object.keys(data).length === 0) ? <Text style={text}>
+      There are no patches available for this system!
+    </Text> : <Fragment>
+      <Text style={text}>Available patch advisories for this system</Text>
+      <PieChart
         data={
           Object.entries(colorMapper).map(([key, color]) => ({
             name: key,
@@ -72,6 +76,7 @@ const Patch = ({ systemId }) => {
           borderRadius: 16,
         }}
       />
+    </Fragment>}
   </View>
 };
 

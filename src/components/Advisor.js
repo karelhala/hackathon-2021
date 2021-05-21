@@ -6,6 +6,7 @@ import {
   PieChart,
 } from 'expo-chart-kit'
 import white from '@patternfly/react-tokens/dist/js/global_palette_white';
+import { Fragment } from 'react';
 
 const colorMapper = {
   Low: 'rgba(231, 241, 250, 0.6)',
@@ -43,8 +44,11 @@ const Advisor = ({ systemId }) => {
     paddingRight: 10,
     backgroundColor: white.value
   }}>
-    <Text style={text}>Risks on system found by Insights advisor</Text>
-    <PieChart
+    {(data && Object.keys(data).length === 0) ? <Text style={text}>
+      There are no risks found by Insights advisor on this system!
+    </Text> : <Fragment>
+      <Text style={text}>Risks on system found by Insights advisor</Text>
+      <PieChart
         data={
           Object.entries(colorMapper).map(([key, color]) => ({
             name: key,
@@ -73,6 +77,7 @@ const Advisor = ({ systemId }) => {
           borderRadius: 16,
         }}
       />
+    </Fragment>}
   </View>
 };
 

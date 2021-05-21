@@ -13,6 +13,7 @@ import InventoryDetail from '../components/InventoryDetail'
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import darkColor from '@patternfly/react-tokens/dist/js/global_Color_dark_100';
 import Icon from '../components/Icon';
+import Release from '../components/ReleaseVersion';
 
 const Inventory = ({ navigation }) => {
   const { text, whiteText } = useContext(ThemeContext);
@@ -65,16 +66,27 @@ const Inventory = ({ navigation }) => {
               </Stack>
           </Modal>
           <Table
-            header={['Name', 'Last seen']}
+            header={[
+              'Name',
+              'Release',
+              'Last seen'
+            ]}
             onRefresh={() => refreshData()}
             refreshing={data === undefined}
-            rows={data?.results.map(({ id, display_name, created }) => ({
+            rows={data?.results.map(({ id, display_name, created, system_profile }) => ({
               id,
-              data: [ <Button titleStyle={text} onPress={() => setOpenSystem({
-                id,
-                name: display_name,
-                lastSeen: created
-              })} variant="plain" title={display_name} />, <FormatDate date={created}/> ]
+              data: [
+                <Button titleStyle={text} onPress={() => setOpenSystem({
+                  id,
+                  name: display_name,
+                  lastSeen: created
+                })}
+                variant="plain"
+                title={display_name}
+                />,
+                <Release release={system_profile}/>,
+                <FormatDate date={created}/>
+              ]
             }))}
         />
       </View>
