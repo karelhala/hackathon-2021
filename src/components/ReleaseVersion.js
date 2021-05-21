@@ -22,10 +22,10 @@ const ReleaseVersion = ({system_profile}) => {
 
 const styles = StyleSheet.create({
     button: {
-        paddingHorizontal: 2,
-        paddingVertical: 2,
+        paddingHorizontal: 6,
+        paddingVertical: 6,
         borderRadius: 2,
-        //backgroundColor: "oldlace",
+        backgroundColor: `#f08080`,
         alignSelf: "flex-start",
         marginHorizontal: "1%",
         marginBottom: 3,
