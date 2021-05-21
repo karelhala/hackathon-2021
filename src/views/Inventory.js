@@ -74,18 +74,18 @@ const Inventory = ({ navigation }) => {
             ]}
             onRefresh={() => refreshData()}
             refreshing={data === undefined}
-            rows={data?.results.map(({ id, display_name, created }) => ({
+            rows={data?.results.map(({ id, display_name, updated }) => ({
               id,
               data: [
                 <Button titleStyle={text} onPress={() => setOpenSystem({
                   id,
                   name: display_name,
-                  lastSeen: created
+                  lastSeen: updated
                 })}
                 variant="plain"
                 title={display_name}
                 />,
-                <FormatDate date={created}/>,
+                <FormatDate date={updated}/>,
                 <Button style={{ marginLeft: 130, width: '40%' }} title="Remediate" onPress={() => setRemediate({ id, displayName: display_name })}/>
               ]
             }))}
