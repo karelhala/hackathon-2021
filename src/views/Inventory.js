@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { Text, View, Modal, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Modal } from 'react-native';
 import { LoginContext, ThemeContext } from '../utils/contexts';
 import { authFetch } from '../utils/api';
 import Header from './Header';
@@ -13,11 +13,12 @@ import InventoryDetail from '../components/InventoryDetail'
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import darkColor from '@patternfly/react-tokens/dist/js/global_Color_dark_100';
 import Icon from '../components/Icon';
-import Release from '../components/ReleaseVersion';
+import Remediate from '../game';
 
 const Inventory = ({ navigation }) => {
   const { text, whiteText } = useContext(ThemeContext);
   const config = useContext(LoginContext);
+  const [remediate, setRemediate] = useState();
   const [openSystem, setOpenSystem] = useState();
   const [data, setData] = useState(); // here should be paginated data
   const refreshData = useCallback(() => {
@@ -68,12 +69,12 @@ const Inventory = ({ navigation }) => {
           <Table
             header={[
               'Name',
-              'Release',
-              'Last seen'
+              'Last seen',
+              ''
             ]}
             onRefresh={() => refreshData()}
             refreshing={data === undefined}
-            rows={data?.results.map(({ id, display_name, created, system_profile }) => ({
+            rows={data?.results.map(({ id, display_name, created }) => ({
               id,
               data: [
                 <Button titleStyle={text} onPress={() => setOpenSystem({
@@ -84,11 +85,12 @@ const Inventory = ({ navigation }) => {
                 variant="plain"
                 title={display_name}
                 />,
-                <Release release={system_profile}/>,
-                <FormatDate date={created}/>
+                <FormatDate date={created}/>,
+                <Button style={{ marginLeft: 130, width: '40%' }} title="Remediate" onPress={() => setRemediate({ id, displayName: display_name })}/>
               ]
             }))}
         />
+        <Remediate isOpen={remediate !== undefined} {...remediate} setIsOpen={() => setRemediate(undefined)} />
       </View>
     </View>;
 }
