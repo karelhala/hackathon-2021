@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
 import { Text, Modal } from 'react-native';
 import { Stack, StackItem } from '../layouts/Stack';
 import { Split, SplitItem } from '../layouts/Split';
@@ -8,9 +8,18 @@ import { TimesIconConfig } from '@patternfly/react-icons';
 import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_black_100';
 import darkColor from '@patternfly/react-tokens/dist/js/global_Color_dark_100';
 import { ThemeContext } from '../utils/contexts';
+import { GameEngine } from "react-native-game-engine";
+import { Physics, UpdatePlayer, UpdateObstacle } from './Systems';
+import Entities from './Entities';
+import { debounce } from '../utils/constants';
 
 const Game = ({ displayName, id, isOpen = false, setIsOpen }) => {
   const { whiteText } = useContext(ThemeContext);
+  const endGame = useCallback(debounce(() => {
+    setIsOpen(false);
+    alert(`Remediation failed! Your system with ID: ${id} was marked for culling by The Reaper`)
+  }, 100), [id]);
+  const gameRef = useRef();
   return <Modal
   animationType = {"slide"}
   transparent={false}
@@ -36,7 +45,22 @@ const Game = ({ displayName, id, isOpen = false, setIsOpen }) => {
       <StackItem isFill style={{
         backgroundColor: global_Color_100.value
       }}>
-        <Text>Game will be here!</Text>
+        <GameEngine
+          style={{
+            flex: 1,
+            backgroundColor: "#FFF"
+          }}
+          onEvent={({ type }) => {
+            if (type === 'gameOver') {
+              endGame();
+            }
+          }}
+          ref={gameRef}
+          systems={[Physics, UpdatePlayer, UpdateObstacle]}
+          entities={Entities()}
+          running={isOpen}
+        >
+        </GameEngine>
       </StackItem>
     </Stack>
 </Modal>
