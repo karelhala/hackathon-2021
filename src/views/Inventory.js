@@ -14,6 +14,8 @@ import global_Color_100 from '@patternfly/react-tokens/dist/js/global_palette_bl
 import darkColor from '@patternfly/react-tokens/dist/js/global_Color_dark_100';
 import Icon from '../components/Icon';
 import Remediate from '../game';
+import Pagination from '../components/Pagination';
+import ReleaseVersion from '../components/ReleaseVersion';
 
 const Inventory = ({ navigation }) => {
   const { text, whiteText } = useContext(ThemeContext);
@@ -66,15 +68,17 @@ const Inventory = ({ navigation }) => {
                 </StackItem>
               </Stack>
           </Modal>
+          <Pagination />
           <Table
             header={[
               'Name',
               'Last seen',
+              'Release Version',
               ''
             ]}
             onRefresh={() => refreshData()}
             refreshing={data === undefined}
-            rows={data?.results.map(({ id, display_name, updated }) => ({
+            rows={data?.results.map(({ id, display_name, updated, system_profile}) => ({
               id,
               data: [
                 <Button titleStyle={text} onPress={() => setOpenSystem({
@@ -86,6 +90,7 @@ const Inventory = ({ navigation }) => {
                 title={display_name}
                 />,
                 <FormatDate date={updated}/>,
+                <ReleaseVersion system_profile={system_profile}/>,
                 <Button style={{ marginLeft: 130, width: '40%' }} title="Remediate" onPress={() => setRemediate({ id, displayName: display_name })}/>
               ]
             }))}
